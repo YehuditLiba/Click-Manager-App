@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "node-models": "^2.1.5"
+  }
+}
