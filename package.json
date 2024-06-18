@@ -1,5 +1,15 @@
 {
+  "name": "my-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "dependencies": {
-    "node-models": "^2.1.5"
+    "express": "^4.19.2",
+    "mongoose": "^5.13.7",
+    "nodemon": "^3.1.3"
   }
 }
