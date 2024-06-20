@@ -10,7 +10,6 @@ router.get('/lists', listController.getAllLists);
 router.get('/Pub_list/by_name', listController.getListByName);
 //router.get('searchByName', listController.searchByName);
 
-
 router.get('/Publist', publisherlistController.getList);
 
 module.exports = router;

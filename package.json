@@ -1,18 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "my-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "type": "module",
-  "scripts": {
-    "start": "nodemon app.js"
-  },
-  "dependencies": {
-    "express": "^4.19.2",
-    "mongoose": "^5.13.7",
-    "nodemon": "^3.1.3"
-=======
   "name": "click-manager-app",
   "version": "1.0.0",
   "description": "",
@@ -26,6 +12,5 @@
     "express": "^4.17.1",
     "mongoose": "^5.10.0",
     "body-parser": "^1.19.0"
->>>>>>> master
   }
 }
