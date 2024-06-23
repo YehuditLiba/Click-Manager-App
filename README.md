@@ -8,3 +8,5 @@
 נדבר אחרי הזום ..
 
 https://meet.google.com/pmw-xvfp-fpb
+1.שמשהו יאשר בקשה
+2.הכנסתי את זה לFRONT
