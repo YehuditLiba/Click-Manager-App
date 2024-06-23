@@ -1,52 +1,12 @@
-const Clicklimit_list = require('../models/mainListModel');
-const dbMain=require('../utils/dbMain');  
 
-exports.createList = async (req, res) => {
-    try {
-        const { name, description, limit, creationDate, lastUpdatedDate, publisherAppList } = req.body;
-        const newList = new Clicklimit_list({
-            name,
-            description,
-            limit,
-            creationDate: new Date(creationDate),
-            lastUpdatedDate: new Date(lastUpdatedDate),
-            publisherAppList
-        });
-        const list = await newList.save();
-        res.json(list);
-    } catch (err) {
-        res.status(500).send(err);
-    }
-};
-
-exports.deleteList = async (req, res) => {
-    try {
-        await Click.findByIdAndRemove(req.params.name);
-        res.json({ message: 'List deleted' });
-    } catch (err) {
-        res.status(500).send(err);
-    }
-};
-
-// exports.getAllLists = async (req, res) => {
-//     try {
-//         console.log("11");
-//         const lists = await Clicklimit_list.find({});
-//         console.log(lists);
-//         console.log("22");
-//          res.json(lists);
-//         console.log(lists);
-//     } catch (err) {
-
-//         res.status(500).send(err);
-//     }
-// };
+const dbMain=require('../utils/dbMain'); 
+const dbpubList= require('../utils/dbPubList');
 
 
 exports.getAllLists = async (req, res) => {
     try {
         console.log("Fetching all lists...");
-        const lists = await dbMain.getAllLists(); // קריאה לפונקציה getAllLists מ-dbMain
+        const lists = await dbMain.getAllLists(); //   getAllLists => dbMain
         res.json(lists);
     } catch (err) {
         console.error(err);
@@ -56,8 +16,9 @@ exports.getAllLists = async (req, res) => {
 
 exports.getListByName = async (req, res) => {
     try {
+        console.log("con");
         const name = req.query.name; // query parameters
-        const list = await dbpubList.getListByName(name);
+        const list = await dbMain.getListByName(name);
         console.log("in controller: " + list);
         if (list) {
             res.json(list);
@@ -66,6 +27,58 @@ exports.getListByName = async (req, res) => {
         }
     } catch (err) {
         console.error(err);
+        res.status(500).send("Server Error");
+    }
+};
+
+exports.createList = async (req, res) => {
+    try {
+        console.log("con");
+        const { name, description, limit, creationDate, lastUpdatedDate, publisherAppList } = req.body;
+        const listData = {
+            name,
+            description,
+            limit,
+            creationDate: new Date(creationDate),
+            lastUpdatedDate: new Date(lastUpdatedDate),
+            publisherAppList
+        };
+        console.log("list data: " + listData);
+        const list = await dbMain.createListInDB(listData);
+        res.json(list);
+    } catch (err) {
+        console.error("Error in createList controller:", err);
+        res.status(500).send("Server Error");
+    }
+};
+
+exports.deleteListByName = async (req, res) => {
+    try {
+        console.log("Deleting list by name...");
+        const { name } = req.params;
+        const deletedList = await dbMain.deleteListByName(name);
+        if (!deletedList) {
+            return res.status(404).json({ message: 'List not found' });
+        }
+        res.json({ message: 'List deleted successfully', deletedList });
+    } catch (err) {
+        console.error("Error in deleteListByName controller:", err);
+        res.status(500).send("Server Error");
+    }
+};
+exports.editLimitByName = async (req, res) => {
+    try {
+        const { listName, limit } = req.params;
+        if (limit == null) {
+            return res.status(400).json({ message: 'Limit is required' });
+        }
+        const updatedList = await dbMain.editLimitByName(listName, parseInt(limit));
+        if (!updatedList) {
+            return res.status(404).json({ message: 'List not found' });
+        }
+        res.json({ message: 'Limit updated successfully', updatedList });
+    } catch (err) {
+        console.error("Error in editLimitByName controller:", err);
         res.status(500).send("Server Error");
     }
 };
