@@ -7,3 +7,4 @@
 וככה כל צד יהיה לעצמו מסודר?
 נדבר אחרי הזום ..
 
+https://meet.google.com/pmw-xvfp-fpb
