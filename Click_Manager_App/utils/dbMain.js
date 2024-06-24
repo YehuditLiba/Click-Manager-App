@@ -6,7 +6,7 @@ class dbMain{
     async getAllLists() {
         try {
             const lists = await mainListModel.find({});
-            return lists;
+            return lists.toString();
         } catch (err) {
             console.error(err);
             throw err;
@@ -28,7 +28,7 @@ class dbMain{
         const MainList = await mainListModel.findOne({ 'publisherAppList.name': name });
         if (!MainList) return "Main list not found";
         const pubItem = MainList.publisherAppList.find(item => item.name === name);
-        if (pubItem) return pubItem;
+        if (pubItem) return pubItem.toString();
         else return "Publisher not found";
     } catch (error) {
         console.error(error);

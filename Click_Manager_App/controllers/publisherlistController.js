@@ -1,13 +1,13 @@
 
-const dbpubList = require('../utils/dbPublist');
+const dbpublist = require('../utils/dbPublist.js');
 
 exports.getList = async (req, res) => {
   try {
     //by_body
     console.log("hi")
-    const name = req.body.name;
+    const name = req.query.name;
     console.log("this is the name" + name);
-    const list = await dbpubList.getPublisherlist(name);
+    const list = await dbpublist.getPublisherlist(name);
     console.log("in controller" + list);
     res.send(list);
   }

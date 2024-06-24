@@ -1,6 +1,7 @@
 
 const dbMain=require('../utils/dbMain'); 
-const dbpubList= require('../utils/dbPubList');
+const dbpubList= require('../utils/dbPublist');
+//const pubListController=require('../utils/pubListController');
 
 
 exports.getAllLists = async (req, res) => {
@@ -83,6 +84,25 @@ exports.editLimitByName = async (req, res) => {
     }
 };
 
+
+// exports.validateString= async (req, res) => {
+//    try{
+//          const name=req.query.name;
+//          const word=;
+//          console.log("name"+name);
+//          console.log("word"+word);
+//          const list = await getPublisherlist(name);
+//         //  return res.status(200).json
+//         console.log("list"+list);
+//          const index=list.find(word);
+//          if(index!=-1)
+//          return true;
+//         return false;
+//    }
+//    catch{
+//        res.status(500).send("Server Error");
+//    }
+// };
 
 // exports.searchByName= async (req, res) =>{
 //  try{

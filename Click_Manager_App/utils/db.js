@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://y4144246:YEHUDIT246@click-manager-app.xwzswku.mongodb.net/CMA',
-             {
+        await mongoose.connect('mongodb+srv://y4144246:YEHUDIT246@click-manager-app.xwzswku.mongodb.net/CMA',{
+             
             useNewUrlParser: true,
             useUnifiedTopology: true
 
