@@ -19,8 +19,8 @@ export const LIL=()=> {
     //צריך לשמור את הכניסה לרשימה בסטייט כדי שנדע איפה אנחנו
     //כלומר כאשר נבע עידכון כיצד נדע באיזה רשימה אנחנו כעת 
     //?לאיזה רשימה נבצע עידכון
-    const token =useSelector(state => state.list.token);
-
+    const publist =useSelector(state => state.list.publisherList);
+    const limlist =useSelector(state => state.list.limitList);
     //הצגת הרשימה
     //punc onInit that show list 
     //   state או הSTORמכילה קריאת שרת שמבקש לפי ה
@@ -29,7 +29,7 @@ export const LIL=()=> {
     //שמירת הרשומה החדשה
     const Save = () => {
         const URL = " ";
-        fetch(URL + token,
+        fetch(URL + limlist,
             {
                 body: JSON.stringify({ ...newRec }),
                 // איזה סוג הקריאה
@@ -50,7 +50,7 @@ export const LIL=()=> {
 
     const Update = () => {//מקבל משהו?
         const URL = " ";
-        fetch(URL + token ,//+?איך השרת מצפה לקבל רשימה פנימית לעריכה
+        fetch(URL + publist ,//+?איך השרת מצפה לקבל רשימה פנימית לעריכה
             {
                 body: JSON.stringify({ ...newRec }),
                 // איזה סוג הקריאה
@@ -70,14 +70,14 @@ export const LIL=()=> {
     }
     
 
-    const deleted = (id) => {
-        fetch(URL + '' + id, {//להוסיף את שם הפונקציה
+    const deleted = (props) => {
+        fetch(URL + props.limlist + props.publist, {//להוסיף את שם הפונקציה
            method: 'DELETE',
    
        }).then(res => {
            if(res.ok){
                alert('DELETE!!!');
-               setDeletdIndex(id);
+               setDeletdIndex(id);//?
                refresh();
            }
            else {
@@ -105,11 +105,11 @@ export const LIL=()=> {
             )};
             {/*  קוד שמקבל רשימה מהשרת וממפה אותה לצורך הדפסה*/}
             {/* PUBLISHER לוקח את מה שחזר מהשרת במקרה הזה צריך לקחת את רשימת ה */}
-             <div id='list' className="record">
+            <div id='list' className="record">
                 <div>-</div>
                 {myList.map((record) => (
                     <div>{record.name}+{record.desc}
-                        <button onClick={Update()}>update</button><button onClick={deleted(state.idin)}>delete</button>
+                        <button onClick={Update()}>update</button><button onClick={deleted(limlist,publist)}>delete</button>
                     </div>
                 ))}
             </div>
