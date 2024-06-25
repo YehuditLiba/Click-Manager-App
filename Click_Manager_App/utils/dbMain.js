@@ -6,7 +6,7 @@ class dbMain{
     async getAllLists() {
         try {
             const lists = await mainListModel.find({});
-            return lists.toString();
+            return lists;
         } catch (err) {
             console.error(err);
             throw err;
@@ -23,7 +23,7 @@ class dbMain{
         }
     }
 
-    getListByName = async (name) => {
+     getListByName = async (name) => {
     try {
         const MainList = await mainListModel.findOne({ 'publisherAppList.name': name });
         if (!MainList) return "Main list not found";
@@ -34,6 +34,59 @@ class dbMain{
         console.error(error);
         throw error;
     }
-}
+    }
+
+     createListInDB = async (listData) => {
+        try {
+            const newList = new mainListModel(listData);
+            return await newList.save();
+        } catch (err) {
+            console.error("Error saving list to DB:", err);
+            throw err;
+        }
+    };
+
+    async deleteListByName(name) {
+        try {
+            const deletedList = await mainListModel.findOneAndDelete({ name });
+            return deletedList;
+        } catch (err) {
+            console.error("Error deleting list from DB:", err);
+            throw err;
+        }
+    }
+    async editLimitByName(name, limit) {
+        try {
+            console.log("name: " + name);
+            console.log("limit: " + limit);
+            const updatedList = await mainListModel.findOneAndUpdate(
+                { name },
+                { $set: { limit, lastUpdatedDate: new Date() } },
+                { new: true }
+            );
+            return updatedList;
+        } catch (err) {
+            console.error("Error updating limit in DB:", err);
+            throw err;
+        }
+    }
+    async editDescriptionByName(name, newDescription) {
+        try {
+            console.log("name: " + name);
+            console.log("newDescription: " + newDescription);
+    
+            const updatedList = await mainListModel.findOneAndUpdate(
+                { name },
+                { $set: { description: newDescription, lastUpdatedDate: new Date() } },
+                { new: true }
+            );
+    
+            return updatedList;
+        } catch (err) {
+            console.error("Error updating description in DB:", err);
+            throw err;
+        }
+    }
+
 }
  module.exports = new dbMain();
