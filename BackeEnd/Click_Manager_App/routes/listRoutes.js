@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const listController = require('../controllers/mainListController');
-const publisherlistController = require('../controllers/publisherlistController');
+const listController = require('../Components/mainListController');
+const publisherlistController = require('../Components/publisherlistController');
 
 
 router.post('/Addlists',listController.createList);
