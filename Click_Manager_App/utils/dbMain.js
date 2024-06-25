@@ -2,7 +2,6 @@ const mainListModel=require('../models/mainListModel');
 const db=require('../utils/db');
 
 class dbMain{
-
     async getAllLists() {
         try {
             const lists = await mainListModel.find({});
@@ -12,7 +11,7 @@ class dbMain{
             throw err;
         }
     }
-
+    
     async getAllListsString() {
         try {
             const lists = await mainListModel.find({});

@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const connectDB = require('./Click_Manager_App/utils/db');
 const listRoutes = require('./Click_Manager_App/routes/listRoutes');
@@ -12,6 +13,7 @@ const app = express();
 // שימוש ב-body-parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 // Define Routes
 app.use('/api', listRoutes);
