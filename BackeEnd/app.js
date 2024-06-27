@@ -14,10 +14,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-<<<<<<< HEAD:app.js
 
-=======
->>>>>>> Yehudit_Vitman:BackeEnd/app.js
+
 // Define Routes
 app.use('/api', listRoutes);
 //app.use('/api/publists', listRoutes);

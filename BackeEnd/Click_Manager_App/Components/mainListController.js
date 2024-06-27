@@ -31,6 +31,10 @@ exports.getListByName = async (req, res) => {
     }
 };
 
+
+
+
+// 
 exports.createList = async (req, res) => {
     try {
         console.log("con");
@@ -39,8 +43,8 @@ exports.createList = async (req, res) => {
             name,
             description,
             limit,
-            creationDate: new Date(creationDate),
-            lastUpdatedDate: new Date(lastUpdatedDate),
+            creationDate: new Date(),
+            lastUpdatedDate: new Date(),
             publisherAppList
         };
         console.log("list data: " + listData);
@@ -48,9 +52,10 @@ exports.createList = async (req, res) => {
         res.json(list);
     } catch (err) {
         console.error("Error in createList controller:", err);
-        res.status(500).send("Server Error");
+        res.status(500).send(err);
     }
 };
+
 
 exports.deleteListByName = async (req, res) => {
     try {
@@ -96,6 +101,9 @@ exports.updateList = async (req, res) => {
 
 
 
+
+
+//  
 // exports.searchByName= async (req, res) =>{
 //  try{
     
