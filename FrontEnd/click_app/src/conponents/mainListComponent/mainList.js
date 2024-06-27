@@ -1,28 +1,30 @@
 import React from 'react';
 
-function MainList({ list }) {
-    const renderApps = () => {
-        return list.publisherAppList.map(app => {
-            return (
-                React.createElement('li', { key: app._id },
-                    React.createElement('strong', null, app.name + ': '),
-                    app.description
-                )
-            );
-        });
-    };
-
+const MainList = ({ list, onDelete }) => {
     return (
-        React.createElement('div', null,
-            React.createElement('h2', null, list.name),
-            React.createElement('p', null, React.createElement('strong', null, 'Description: '), list.description),
-            React.createElement('p', null, React.createElement('strong', null, 'Limit: '), list.limit),
-            React.createElement('h3', null, 'Publisher Apps:'),
-            React.createElement('ul', null, renderApps()),
-            React.createElement('p', null, React.createElement('strong', null, 'Creation Date: '), list.creationDate),
-            React.createElement('p', null, React.createElement('strong', null, 'Last Updated: '), list.lastUpdatedDate)
-        )
+        <div className="main-list">
+            <h2>{list.name}</h2>
+            {list.description && <p><strong>Description:</strong> {list.description}</p>}
+            {list.limit && <p><strong>Limit:</strong> {list.limit}</p>}
+            {list.creationDate && <p><strong>Creation Date:</strong> {new Date(list.creationDate).toLocaleDateString()}</p>}
+            {list.lastUpdatedDate && <p><strong>Last Updated Date:</strong> {new Date(list.lastUpdatedDate).toLocaleDateString()}</p>}
+            {list.publisherAppList && list.publisherAppList.length > 0 && (
+                <div>
+                    <p><strong>Publisher App List:</strong></p>
+                    <ul>
+                        {list.publisherAppList.map((item, index) => (
+                            <li key={index}>
+                                {JSON.stringify(item)}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+            {onDelete && (
+                <button onClick={onDelete}>Delete List</button>
+            )}
+        </div>
     );
-}
+};
 
 export default MainList;
