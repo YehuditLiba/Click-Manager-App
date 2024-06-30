@@ -7,6 +7,7 @@ const publisherlistController = require('../Components/publisherlistController')
 router.post('/Addlists',listController.createList);
 router.delete('/lists/:name', listController.deleteListByName);
 router.get('/lists', listController.getAllLists);
+router.get('/listsString', listController.getAllListsString);
 router.get('/Pub_list/by_name', listController.getListByName);
 router.put('/lists/:name/update', listController.updateList);
 

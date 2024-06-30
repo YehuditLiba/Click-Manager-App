@@ -3,6 +3,16 @@ const dbMain=require('../utils/dbMain');
 // const dbpubList= require('../utils/dbPubList');
 
 
+exports.getAllListsString = async (req, res) => {
+    try {
+        console.log("Fetching all lists...");
+        const lists = await dbMain.getAllListsString(); //   getAllLists => dbMain
+        res.json(lists);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server Error");
+    }
+};
 exports.getAllLists = async (req, res) => {
     try {
         console.log("Fetching all lists...");
@@ -77,14 +87,15 @@ exports.updateList = async (req, res) => {
         const { limit, description } = req.body;
 
         if (limit !== undefined) {
-            // קריאה לפונקציה לעדכון המגבלה
+          
             const updatedList = await dbMain.editLimitByName(name, parseInt(limit));
             if (!updatedList) {
                 return res.status(404).json({ message: 'List not found' });
             }
             res.json({ message: 'Limit updated successfully', updatedList });
         } else if (description !== undefined) {
-            // קריאה לפונקציה לעדכון התיאור
+           
+            
             const updatedList = await dbMain.editDescriptionByName(name, description);
             if (!updatedList) {
                 return res.status(404).json({ message: 'List not found' });
