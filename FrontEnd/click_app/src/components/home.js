@@ -17,6 +17,22 @@ const Home = () => {
         fetchLists();
     }, []);
 
+    const deletePublisher = (lim,pub) => {
+        console.log("enter to delete function")
+        axios.delete(`http://localhost:5000/api/deletePublisher/${lim}/${pub}`)
+            .then((response) => {
+                console.log('Publisher deleted successfully');
+                setSelectedList(prevSelectedList => ({
+                    ...prevSelectedList,
+                    publisherAppList: prevSelectedList.publisherAppList.filter(item => item.name !== pub)
+                }));
+                fetchLists();
+            })
+            .catch(error => {
+                console.error('Error deleting publisher:', error);
+            });
+    };
+
     const fetchLists = () => {
         axios.get('http://localhost:5000/api/lists')
             .then(response => {
@@ -125,7 +141,7 @@ const Home = () => {
             </div>
             {selectedList && (
                 <div className="main-list-container">
-                    <MainList list={selectedList} onDelete={handleDeleteList} />
+                    <MainList list={selectedList} onDelete={handleDeleteList }deletePublisher={deletePublisher} />
                 </div>
             )}
         </div>

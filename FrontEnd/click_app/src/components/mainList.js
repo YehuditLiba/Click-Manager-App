@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Designs/AddList.css';
 
-const MainList = ({ list, onDelete }) => {
+const MainList = ({ list, onDelete, deletePublisher}) => {
     return (
         <div className="main-list">
             <h2>{list.name}</h2>
@@ -16,6 +16,7 @@ const MainList = ({ list, onDelete }) => {
                         {list.publisherAppList.map((item, index) => (
                             <li key={index}>
                                 {JSON.stringify(item)}
+                                <button onClick={() => deletePublisher(list.name,item.name)}>Delete</button>
                             </li>
                         ))}
                     </ul>
